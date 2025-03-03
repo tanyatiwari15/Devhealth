@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background: white">
+  <!-- Camera icon -->
+  <g transform="translate(160, 110)" fill="#6366f1">
+    <path d="M40 30h-4.5l-2.3-2.3c5.6-6.5 9-15 9-24.2C42.2 1.6 40.6 0 38.7 0H11.3C9.4 0 7.8 1.6 7.8 3.5c0 9.2 3.4 17.7 9 24.2L14.5 30H10c-2.2 0-4 1.8-4 4v6c0 2.2 1.8 4 4 4h30c2.2 0 4-1.8 4-4v-6c0-2.2-1.8-4-4-4zM25 8c-6.1 0-11 4.9-11 11s4.9 11 11 11 11-4.9 11-11-4.9-11-11-11zm0 16c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z"/>
+  </g>
+  <!-- Text -->
+  <text x="200" y="200" text-anchor="middle" fill="#4b5563" font-family="system-ui, -apple-system, sans-serif" font-size="16">
+    Click 'Start Detection' to begin
+  </text>
+</svg>

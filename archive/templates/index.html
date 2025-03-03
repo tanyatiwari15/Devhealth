@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>DevHealth - Back Care</title>
+    <link rel="icon" type="image/png" href="../static/images/fire-symbol.png" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      .video-container {
+        position: relative;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .video-feed {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: white;
+      }
+
+      .metrics-container {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 1);
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .metrics-container div {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #1a1a1a;
+      }
+
+      .status-indicator {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 500;
+      }
+
+      .status-good {
+        background: #10b981;
+        color: white;
+      }
+
+      .status-bad {
+        background: #ef4444;
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="w-full">
+    <nav class="navbar !pl-32">
+      <a
+        href="#"
+        class="logo text-black/90 flex gap-4 font-medium text-2xl items-center"
+      >
+        <img src="../static/images/fire-symbol.png" alt="" class="w-8 h-8" />
+        DevHealth
+      </a>
+    </nav>
+
+    <div class="flex w-full flex-row bg-white min-h-[100vh]">
+      <div class="w-[22%]">
+        <aside
+          class="bg-white border-r-1 border-r-black/10 h-full flex items-start justify-end !pb-20"
+        >
+          <ul class="flex flex-col gap-8 justify-center h-full">
+            <a
+              href="http://localhost:3000/"
+              class="cursor-pointer w-full rounded-3xl !py-2 !px-8 transition-all duration-200 hover:bg-blue-50"
+            >
+              <li class="flex items-center">
+                <i
+                  class="fas fa-house-chimney text-2xl text-blue-600/75 !mr-4 !z-10 group-hover:text-blue-600"
+                ></i>
+                <span class="text-xl font-semibold group-hover:font-medium"
+                  >Dashboard</span
+                >
+              </li>
+            </a>
+            <!-- This is the active page, so it keeps the blue background -->
+            <a
+              href="http://127.0.0.1:5000/"
+              class="cursor-pointer w-full rounded-3xl !py-2 !px-8 !z-10 hover:bg-blue-50"
+            >
+              <li class="flex items-center">
+                <i class="fas fa-child text-3xl text-blue-600 !mr-4"></i>
+                <span class="text-xl font-regular">Back care</span>
+              </li>
+            </a>
+            <a
+              href="http://localhost:3000/eyecare"
+              class="cursor-pointer w-full rounded-3xl !py-2 !px-8 z-10 transition-all duration-200 hover:bg-blue-50"
+            >
+              <li class="flex items-center">
+                <i
+                  class="fas fa-eye text-2xl text-blue-600/75 !mr-4 group-hover:text-blue-600"
+                ></i>
+                <span class="text-xl font-normal group-hover:font-medium"
+                  >Eye Care</span
+                >
+              </li>
+            </a>
+            <a
+              href="http://localhost:3000/earcare"
+              class="cursor-pointer w-full rounded-3xl !py-2 !px-8 z-10 transition-all duration-200 hover:bg-blue-50"
+            >
+              <li class="flex items-center">
+                <i
+                  class="fas fa-ear-listen text-2xl text-blue-600/75 !mr-4 group-hover:text-blue-600"
+                ></i>
+                <span class="text-xl font-normal group-hover:font-medium"
+                  >Ear Care</span
+                >
+              </li>
+            </a>
+            <a
+              href="http://localhost:3000/howtouse"
+              class="cursor-pointer w-full rounded-3xl !py-2 !px-8 z-10 transition-all duration-200 hover:bg-blue-50"
+            >
+              <li class="flex items-center">
+                <i
+                  class="fas fa-circle-question text-2xl text-blue-600/75 !mr-4 group-hover:text-blue-600"
+                ></i>
+                <span class="text-xl font-normal group-hover:font-medium"
+                  >How to use</span
+                >
+              </li>
+            </a>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="flex flex-row w-full gap-5 h-full !p-16">
+        <div class="flex flex-col w-[180%] h-full items-start justify-center">
+          <h1 class="title text-2xl font-bold">Back Care</h1>
+
+          <div class="content-grid w-full">
+            <div class="video-section">
+              <div class="video-container">
+                <img
+                  id="videoFeed"
+                  class="video-feed"
+                  alt="Posture Detection Feed"
+                />
+                <div id="metrics" class="metrics-container hidden">
+                  <div>
+                    <span class="font-semibold">Neck Angle: </span>
+                    <span id="neckAngle">0°</span>
+                  </div>
+                  <div>
+                    <span class="font-semibold">Torso Angle: </span>
+                    <span id="torsoAngle">0°</span>
+                  </div>
+                  <div>
+                    <span class="font-semibold">Status: </span>
+                    <span id="postureStatus" class="status-indicator"
+                      >Checking...</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="controls">
+                <button class="btn" id="startButton">Start Detection</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="info-section">
+          <div class="info-section">
+            <div class="info-card">
+              <h2>How to Use</h2>
+              <ol>
+                <li>
+                  1. Position a camera on your side and connect it to your
+                  computer
+                </li>
+                <li>
+                  2. Select this camera as your input device for side view
+                  capture
+                </li>
+                <li>3. Click "Start Detection" to begin posture monitoring</li>
+                <li>
+                  4. Position yourself so your upper body is visible from the
+                  side
+                </li>
+                <li>
+                  5. Follow the on-screen guidance to maintain good posture
+                </li>
+                <li>6. Click "Stop Detection" when you're done</li>
+              </ol>
+            </div>
+
+            <div class="info-card">
+              <h2>Posture Tips</h2>
+              <ul>
+                <li>1. Keep your back straight against the chair</li>
+                <li>2. Position your screen at eye level</li>
+                <li>3.Keep your shoulders relaxed</li>
+                <li>4. Take regular breaks every 20 minutes</li>
+                <li>5. Ensure your feet are flat on the ground</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

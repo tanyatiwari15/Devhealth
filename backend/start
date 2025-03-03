@@ -1,0 +1,4 @@
+python run app.py from alignai_env
+(serving flask app "app"
+debug mode:on)
+go to http://localhost:5000/
